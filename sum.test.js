@@ -1,11 +1,25 @@
-// 매쳐(matcher)의 사용법
-test('2 + 2의 결과는 4입니다.', () => {
-  expect(2 + 2).toBe(4);
+/*
+- toBeNull은 null에만 일치한다.
+- toBeUndefined는 undefined에만 일치한다.
+- toBeDefined는 undefined 외의 모든 것에 일치한다.
+- toBeTruthy는 true로 취급하는 모든 것에 일치한다.
+- toBeFalsy는 false로 취급하는 모든 것에 일치한다.
+*/
+
+test('null', () => {
+  const n = null;
+  expect(n).toBeNull();
+  expect(n).toBeDefined();
+  expect(n).not.toBeUndefined();
+  expect(n).not.toBeTruthy();
+  expect(n).toBeFalsy();
 });
 
-// toEquals의 사용법
-test('객체의 값 비교', () => {
-  const data = { one: 1 };
-  data['two'] = 2;
-  expect(data).toEqual({ one: 1, two: 2 });
+test('zero', () => {
+  const z = 0;
+  expect(z).toBeNull(); // test failed
+  expect(z).toBeDefined();
+  expect(z).not.toBeUndefined();
+  expect(z).not.toBeTruthy();
+  expect(z).toBeFalsy();
 });
