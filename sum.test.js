@@ -1,5 +1,11 @@
-import sum from './sum';
+// 매쳐(matcher)의 사용법
+test('2 + 2의 결과는 4입니다.', () => {
+  expect(2 + 2).toBe(4);
+});
 
-test('1 + 2의 결과값은 3입니다.', () => {
-  expect(sum(1, 2)).toBe(3);
+// toEquals의 사용법
+test('객체의 값 비교', () => {
+  const data = { one: 1 };
+  data['two'] = 2;
+  expect(data).toEqual({ one: 1, two: 2 });
 });
