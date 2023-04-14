@@ -1,22 +1,18 @@
 import { fetchData, fetchDataWithPromise } from './fetchData';
 
-test('fetch a user', (done) => {
-  fetchData(1, (user) => {
-    expect(user).toEqual({
-      id: 1,
-      name: 'User1',
-      email: '1@test.com',
-    });
-    done();
-  });
+let user;
+beforeAll(async () => {
+  user = await fetchDataWithPromise(1);
 });
 
-test('fetch a user with Promise', () => {
-  return fetchDataWithPromise(1).then((user) => {
-    expect(user).toEqual({
-      id: 1,
-      name: 'User1',
-      email: '1@test.com',
-    });
-  });
+test('user id is 1', () => {
+  expect(user.id).toEqual(1);
+});
+
+test('user name is User1', () => {
+  expect(user.name).toEqual('User1');
+});
+
+test('user email is 1@test.com', () => {
+  expect(user.email).toEqual('1@test.com');
 });
