@@ -1,3 +1,7 @@
+export function add(a, b) {
+  return a + b;
+}
+
 export function fetchData(id, cb) {
   setTimeout(() => {
     console.log('wait 0.1 sec');
