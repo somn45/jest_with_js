@@ -1,27 +1,31 @@
-import { forEach } from './mock';
+/*
+// 모의 모듈 
 
-const mockCallback = jest.fn((x) => 42 + x); // 모의 함수의 생성
-const myMock = jest.fn();
-console.log(myMock()); // undefined
+import axios from 'axios';
+import Users from './users';
 
-myMock.mockReturnValueOnce(10).mockReturnValueOnce('x').mockReturnValue(true);
+jest.mock('axios');
 
-console.log(myMock(), myMock(), myMock(), myMock()); // 10, 'x', true, true
+test('should fetch users', () => {
+  const users = [{name: 'Bob'}];
+  const resp = {data: users};
+  axios.get.mockResolvedValue(resp);
 
-forEach([0, 1], mockCallback);
+  return Users.all().then(data => expect(data).toEqual(users));
+});
+*/
 
-test('모의 함수가 두 번 호출 됩니다', () => {
-  expect(mockCallback.mock.calls.length).toBe(2);
+jest.mock('./sum');
+import foo from './sum';
+
+test('모의 함수 foo의 실행', () => {
+  const num = foo(1, 2);
+  expect(num).toBe(num);
 });
 
-test('함수에 대한 첫 번째 호출의 첫 번째 인자는 0 이었음', () => {
-  expect(mockCallback.mock.calls[0][0]).toBe(0);
-});
+foo.mockImplementation(() => 42);
 
-test('함수에 대한 두 번째 호출의 첫 번째 인자는 1 이었음', () => {
-  expect(mockCallback.mock.calls[1][0]).toBe(1);
-});
-
-test('함수에 대한 첫 번째 호출의 반환 된 값은 42 이었음', () => {
-  expect(mockCallback.mock.results[0].value).toBe(42);
+test('mockImplementation으로 재 정의된 foo의 실행', () => {
+  const num = foo();
+  expect(num).toBe(42);
 });
